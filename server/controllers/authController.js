@@ -21,6 +21,7 @@ export const registerUser = async (req, res) => {
     res.status(201).json({user: { id: user._id, name: user.name, email: user.email, role: user.role }, token });
   }
   catch (error) {
+    console.error(error)
     res.status(500).json({ message: 'Server error', error});
   }
 };
@@ -82,6 +83,7 @@ export const deleteUser = async (req, res) => {
 
 export const updateUser = async (req, res) => {
   try {
+
     const updateUser = await User.findByIdAndUpdate(req.params.id, {$set : req.body}, {new: true, runValidators: true});
     if(!updateUser) return res.status(404).json({ message: 'User not found' });
     
