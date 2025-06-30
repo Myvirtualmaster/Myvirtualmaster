@@ -50,4 +50,15 @@ export const deleteLesson = async (req, res) => {
   }
 }
 
+export const updateLesson = async (req, res) => {
+  try{
+    const updateLesson = await Lesson.findByIdAndUpdate(req.params.id, { $set: req.body}, {new: true, runValidators: true});
+    if(!updateLesson) return res.status(404).json({ message: 'Lesson not found' });
 
+  res.status(200).json(updateLesson);
+  }
+  catch (error) {
+    console.error(error);
+    res.status(500).json({ message : 'Failed to uodate lesson', error })
+  }
+}
