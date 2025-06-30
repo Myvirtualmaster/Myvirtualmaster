@@ -3,6 +3,7 @@ import authRoutes from './authRoutes.js';
 import userRoutes from './userRoutes.js';
 import courseRoutes from './courseRoutes.js';
 import lessonRoutes from './lessonRoutes.js';
+import resourceRoutes from './resourceRoutes.js';
 import { protect } from '../middleware/authMiddleware.js';
 import { isNotStudent } from '../middleware/roleMiddleware.js';
 
@@ -12,5 +13,6 @@ router.use('/auth', authRoutes);
 router.use('/user', userRoutes);
 router.use('/course', protect, isNotStudent, courseRoutes);
 router.use('/lesson', protect, isNotStudent, lessonRoutes);
+router.use('/resource', protect, isNotStudent, resourceRoutes);
 
 export default router;
