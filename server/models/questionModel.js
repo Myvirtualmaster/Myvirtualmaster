@@ -9,23 +9,28 @@ const questionSchema = new mongoose.Schema({
   question: {
     type: String,
     required: true,
+    trim: true,
   },
 
   option_a: {
     type: String,
     required: true,
+    trim: true,
   },
   option_b: {
     type: String,
     required: true,
+    trim: true,
   },
   option_c: {
     type: String,
     required: true,
+    trim: true,
   },
   option_d: {
     type: String,
     required: true,
+    trim: true,
   },
   correct_ans: {
     type: String,
