@@ -10,7 +10,7 @@ import Assignment from './assignmentModel.js';
 import Submission from './submissionModel.js';
 import Notification from './notificationModel.js';
 import Comment from './commentModel.js';
-import Coursereview from './courseReviewModel.js';
+import CourseReview from './courseReviewModel.js';
 import Canlenderevent from './calenderEventModel.js';
 import Progress from './progressModel.js';
 import Certificate from './certificateModel.js';
@@ -32,7 +32,7 @@ export {
   Submission,
   Notification,
   Comment,
-  Coursereview,
+  CourseReview,
   Canlenderevent,
   Progress,
   Certificate,
