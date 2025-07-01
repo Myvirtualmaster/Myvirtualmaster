@@ -19,6 +19,7 @@ import Message from './messageModel.js';
 import Liveclass from './liveClassModel.js';
 import Lessonfeedback from './lessonFeedbackModel.js';
 import Achievement from './achievementModel.js';
+import AdminLog from './adminLogModel.js';
 export {
   User,
   Course,
@@ -41,4 +42,5 @@ export {
   Liveclass,
   Lessonfeedback,
   Achievement,
+  AdminLog,
 };
