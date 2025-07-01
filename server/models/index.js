@@ -11,7 +11,7 @@ import Submission from './submissionModel.js';
 import Notification from './notificationModel.js';
 import Comment from './commentModel.js';
 import CourseReview from './courseReviewModel.js';
-import Canlenderevent from './calenderEventModel.js';
+import CalendarEvent from './calenderEventModel.js';
 import Progress from './progressModel.js';
 import Certificate from './certificateModel.js';
 import Savedcourse from './savedCourseModel.js';
@@ -33,7 +33,7 @@ export {
   Notification,
   Comment,
   CourseReview,
-  Canlenderevent,
+  CalendarEvent,
   Progress,
   Certificate,
   Savedcourse,
