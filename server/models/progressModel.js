@@ -11,16 +11,16 @@ const progressSchema = new mongoose.Schema({
     ref: 'Course',
     required: true,
   },
-  lessons: {
+  lesson: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Course',
+    ref: 'Lesson',
     required: true,
   },
   total_lessons: {
     type: Number,
     required: true,
   },
-  progress_percentage: {
+  progress_pct: {
     type: Number,
     required: true,
   },
