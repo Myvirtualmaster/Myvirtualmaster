@@ -9,12 +9,10 @@ const commentSchema = new mongoose.Schema({
   lesson: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Lesson',
-    required: true,
   },
   assignment: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Assignment',
-    required: true,
   },
   content: {
     type: String,
