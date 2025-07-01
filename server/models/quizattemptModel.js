@@ -17,8 +17,8 @@ const quizAttemptSchema = new mongoose.Schema({
   },
   attempted_at: {
     type: Date,
-    required: true,
+    default: Date.now(),
   }
 })
 
-export default mongoose.model('Quizattempt', quizAttemptSchema);
+export default mongoose.model('QuizAttempt', quizAttemptSchema);

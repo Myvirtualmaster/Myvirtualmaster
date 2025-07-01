@@ -5,7 +5,7 @@ import Lesson from './lessonModel.js';
 import Resource from './resourceModel.js';
 import Quiz from './quizModel.js';
 import Question from './questionModel.js';
-import Quizattempt from './quizattemptModel.js';
+import QuizAttempt from './quizattemptModel.js';
 import Assignment from './assignmentModel.js';
 import Submission from './submissionModel.js';
 import Notification from './notificationModel.js';
@@ -27,7 +27,7 @@ export {
   Resource,
   Quiz,
   Question,
-  Quizattempt,
+  QuizAttempt,
   Assignment,
   Submission,
   Notification,
