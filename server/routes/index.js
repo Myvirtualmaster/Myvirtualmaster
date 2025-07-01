@@ -9,6 +9,7 @@ import questionRoutes from './questionRoutes.js';
 import quizAttemptRoutes from './quizAttemptRoutes.js';
 import assignmentRoutes from './assignmentRoutes.js';
 import submissionRoutes from './submissionRoutes.js';
+import notificationRoutes from './notificationRoutes.js';
 import { protect } from '../middleware/authMiddleware.js';
 import { isNotStudent } from '../middleware/roleMiddleware.js';
 
@@ -24,5 +25,6 @@ router.use('/question', protect, isNotStudent, questionRoutes);
 router.use('/attempt', protect, isNotStudent, quizAttemptRoutes);
 router.use('/assignment', protect, isNotStudent, assignmentRoutes);
 router.use('/submission', protect, isNotStudent, submissionRoutes);
+router.use('/notification', protect, isNotStudent, notificationRoutes);
 
 export default router;
