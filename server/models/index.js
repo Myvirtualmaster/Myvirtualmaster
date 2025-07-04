@@ -8,6 +8,7 @@ import Question from './questionModel.js';
 import QuizAttempt from './quizattemptModel.js';
 import Assignment from './assignmentModel.js';
 import Submission from './submissionModel.js';
+import CourseSubmission from './courseSubmissionModel.js';
 import Notification from './notificationModel.js';
 import Comment from './commentModel.js';
 import CourseReview from './courseReviewModel.js';
@@ -31,6 +32,7 @@ export {
   QuizAttempt,
   Assignment,
   Submission,
+  CourseSubmission,
   Notification,
   Comment,
   CourseReview,
