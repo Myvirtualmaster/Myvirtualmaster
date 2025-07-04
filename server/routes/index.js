@@ -15,6 +15,7 @@ import courseReviewRoutes from './courseReviewRoutes.js';
 import eventRoutes from './eventRoutes.js';
 import progressRoutes from './progressRoutes.js';
 import adminLogRoutes from './adminLogRoutes.js';
+import certificateRoutes from './certificateRoutes.js';
 import { protect } from '../middleware/authMiddleware.js';
 import { isNotStudent } from '../middleware/roleMiddleware.js';
 
@@ -36,5 +37,6 @@ router.use('/review', protect, isNotStudent, courseReviewRoutes);
 router.use('/event', protect, isNotStudent, eventRoutes);
 router.use('/progress', progressRoutes);
 router.use('/log', adminLogRoutes);
+router.use('/certificate', certificateRoutes); 
 
 export default router;
