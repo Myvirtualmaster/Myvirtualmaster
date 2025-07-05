@@ -18,13 +18,14 @@ import adminLogRoutes from './adminLogRoutes.js';
 import certificateRoutes from './certificateRoutes.js';
 import savedCourseRoutes from './savedCourseRoutes.js';
 import courseSubmissionRoutes from './courseSubmissionRoutes.js';
+import messageRoutes from './messageRoutes.js';
 import { protect } from '../middleware/authMiddleware.js';
 import { isNotStudent } from '../middleware/roleMiddleware.js';
 
 const router = express.Router();
 
 router.use('/auth', authRoutes);
-router.use('/user', userRoutes);
+router.use('/user', authRoutes);
 router.use('/course', protect, isNotStudent, courseRoutes);
 router.use('/lesson', protect, isNotStudent, lessonRoutes);
 router.use('/resource', protect, isNotStudent, resourceRoutes);
@@ -42,5 +43,6 @@ router.use('/log', adminLogRoutes);
 router.use('/certificate', certificateRoutes); 
 router.use('/saved', savedCourseRoutes);
 router.use('/course-submission', courseSubmissionRoutes);
+router.use('/message', messageRoutes);
 
 export default router;
