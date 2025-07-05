@@ -1,12 +1,12 @@
 import mongoose from 'mongoose';
 
 const messageSchema = new mongoose.Schema({
-  sender_id: {
+  sender: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true,
   },
-  receiver_id: {
+  receiver: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true,
@@ -21,6 +21,7 @@ const messageSchema = new mongoose.Schema({
   },
   is_read: {
     type: Boolean,
+    default: false,
   },
 })
 

@@ -9,7 +9,7 @@ export const submitCourse = async (req, res) => {
   } catch (err) {
     res.status(500).json({ message: 'Failed to submit course', err });
   }
-};
+}
 
 // Get all submissions (Admin)
 export const getAllSubmissions = async (req, res) => {
