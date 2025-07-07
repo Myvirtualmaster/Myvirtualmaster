@@ -19,6 +19,7 @@ import certificateRoutes from './certificateRoutes.js';
 import savedCourseRoutes from './savedCourseRoutes.js';
 import courseSubmissionRoutes from './courseSubmissionRoutes.js';
 import messageRoutes from './messageRoutes.js';
+import liveClassRoutes from './liveClassRoutes.js';
 import { protect } from '../middleware/authMiddleware.js';
 import { isNotStudent } from '../middleware/roleMiddleware.js';
 
@@ -44,5 +45,6 @@ router.use('/certificate', certificateRoutes);
 router.use('/saved', savedCourseRoutes);
 router.use('/course-submission', courseSubmissionRoutes);
 router.use('/message', messageRoutes);
+router.use('/liveclass', liveClassRoutes);
 
 export default router;

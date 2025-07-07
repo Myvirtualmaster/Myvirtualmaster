@@ -17,7 +17,7 @@ import Progress from './progressModel.js';
 import Certificate from './certificateModel.js';
 import SavedCourse from './savedCourseModel.js';
 import Message from './messageModel.js';
-import Liveclass from './liveClassModel.js';
+import LiveClass from './liveClassModel.js';
 import Lessonfeedback from './lessonFeedbackModel.js';
 import Achievement from './achievementModel.js';
 import AdminLog from './adminLogModel.js';
@@ -41,7 +41,7 @@ export {
   Certificate,
   SavedCourse,
   Message,
-  Liveclass,
+  LiveClass,
   Lessonfeedback,
   Achievement,
   AdminLog,
