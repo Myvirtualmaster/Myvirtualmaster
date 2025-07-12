@@ -18,7 +18,7 @@ import Certificate from './certificateModel.js';
 import SavedCourse from './savedCourseModel.js';
 import Message from './messageModel.js';
 import LiveClass from './liveClassModel.js';
-import Lessonfeedback from './lessonFeedbackModel.js';
+import LessonFeedback from './lessonFeedbackModel.js';
 import Achievement from './achievementModel.js';
 import AdminLog from './adminLogModel.js';
 export {
@@ -42,7 +42,7 @@ export {
   SavedCourse,
   Message,
   LiveClass,
-  Lessonfeedback,
+  LessonFeedback,
   Achievement,
   AdminLog,
 };
