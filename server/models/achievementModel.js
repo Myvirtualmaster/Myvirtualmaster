@@ -1,18 +1,21 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
-const achievementSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
+const userAchievementSchema = new mongoose.Schema({
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
   },
-  description: {
-    type: String,
-    required: true,
+  badge: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Badge',
+    required: true 
   },
-  icon_url: {
-    type: String,
-    required: true,
+  awarded_at: {
+    type: Date,
+    default: Date.now
   },
-})
+});
 
-export default mongoose.model('Achievement', achievementSchema);
+export default mongoose.model('UserAchievement', userAchievementSchema);
+
