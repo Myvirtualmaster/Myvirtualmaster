@@ -19,8 +19,10 @@ import SavedCourse from './savedCourseModel.js';
 import Message from './messageModel.js';
 import LiveClass from './liveClassModel.js';
 import LessonFeedback from './lessonFeedbackModel.js';
-import Achievement from './achievementModel.js';
+import Badge from './badgeModel.js';
 import AdminLog from './adminLogModel.js';
+import Achievement from './achievementModel.js';
+import Payment from './paymentModel.js';
 export {
   User,
   Course,
@@ -43,6 +45,8 @@ export {
   Message,
   LiveClass,
   LessonFeedback,
-  Achievement,
+  Badge,
   AdminLog,
+  Achievement,
+  Payment,
 };
