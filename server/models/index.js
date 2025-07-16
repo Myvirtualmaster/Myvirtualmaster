@@ -23,6 +23,7 @@ import Badge from './badgeModel.js';
 import AdminLog from './adminLogModel.js';
 import Achievement from './achievementModel.js';
 import Payment from './paymentModel.js';
+import MediaSubmission from './mediaSubmissionModel.js';
 
 export {
   User,
@@ -50,4 +51,5 @@ export {
   AdminLog,
   Achievement,
   Payment,
+  MediaSubmission,
 };

@@ -23,6 +23,7 @@ import liveClassRoutes from './liveClassRoutes.js';
 import feedbackRoutes from './feedbackRoutes.js';
 import paymentRoutes from './paymentRoutes.js';
 import badgeRoutes from './badgeRoutes.js';
+import mediaSubmissionRoutes from './mediaSubmissionRoutes.js';
 import achievementRoutes from './achievementRoutes.js';
 import { protect } from '../middleware/authMiddleware.js';
 import { isNotStudent } from '../middleware/roleMiddleware.js';
@@ -54,5 +55,6 @@ router.use('/feedback', protect, feedbackRoutes);
 router.use('/payment', protect, paymentRoutes);
 router.use('/badge', protect, badgeRoutes);
 router.use('/achievement', protect, achievementRoutes);
+router.use('/mediasubmission', mediaSubmissionRoutes);
 
 export default router;
