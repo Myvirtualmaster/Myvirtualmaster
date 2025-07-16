@@ -22,6 +22,7 @@ import messageRoutes from './messageRoutes.js';
 import liveClassRoutes from './liveClassRoutes.js';
 import feedbackRoutes from './feedbackRoutes.js';
 import paymentRoutes from './paymentRoutes.js';
+import badgeRoutes from './badgeRoutes.js';
 import { protect } from '../middleware/authMiddleware.js';
 import { isNotStudent } from '../middleware/roleMiddleware.js';
 
@@ -50,5 +51,6 @@ router.use('/message', messageRoutes);
 router.use('/liveclass', liveClassRoutes);
 router.use('/feedback', protect, feedbackRoutes);
 router.use('/payment', protect, paymentRoutes);
+router.use('/badge', protect, badgeRoutes);
 
 export default router;
