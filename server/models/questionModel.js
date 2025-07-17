@@ -37,6 +37,6 @@ const questionSchema = new mongoose.Schema({
     enum: ['A', 'B', 'C', 'D'],
     required: true,
   }
-})
+}, {timpestamp: true })
 
 export default mongoose.model('Question', questionSchema);

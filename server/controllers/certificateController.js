@@ -1,4 +1,5 @@
 import { Certificate } from '../models/index.js';
+import { paginate } from '../utils/paginate.js';
 
 
 export const createCertificate = async (req, res) => {
@@ -29,10 +30,17 @@ export const createCertificate = async (req, res) => {
 
 export const getAllCertificates = async (req, res) => {
   try {
-    const certificates = await Certificate.find()
+    const queryBuilder = Certificate.find()
       .populate('user', 'name email')
       .populate('course', 'title');
-    res.status(200).json(certificates);
+
+    const result = await paginate(queryBuilder, {}, {
+      page: req.query.page,
+      limit: req.query.limit,
+      sort: { issued_at: -1 }
+    });
+
+    res.status(200).json(result);
   } catch (err) {
     res.status(500).json({ message: 'Failed to fetch certificates', err });
   }
@@ -54,14 +62,20 @@ export const getCertificateById = async (req, res) => {
 
 export const getCertificatesByUser = async (req, res) => {
   try {
-    const certificates = await Certificate.find({ user: req.params.userId })
+    const queryBuilder = Certificate.find({ user: req.params.userId })
       .populate('course', 'title');
-    res.status(200).json(certificates);
+
+    const result = await paginate(queryBuilder, {}, {
+      page: req.query.page,
+      limit: req.query.limit,
+      sort: { issued_at: -1 }
+    });
+
+    res.status(200).json(result);
   } catch (err) {
     res.status(500).json({ message: 'Failed to fetch user certificates', err });
   }
 };
-
 
 export const deleteCertificate = async (req, res) => {
   try {

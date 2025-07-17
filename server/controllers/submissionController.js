@@ -1,4 +1,5 @@
 import {Submission} from '../models/index.js';
+import { paginate } from '../utils/paginate.js';
 
 export const createSubmission = async (req, res) => {
   try {
@@ -12,8 +13,15 @@ export const createSubmission = async (req, res) => {
 
 export const getAllSubmissions = async (req, res) => {
   try {
-    const submissions = await Submission.find();
-    res.status(200).json(submissions);
+    const queryBuilder = Submission.find();
+
+    const result = await paginate(queryBuilder, {}, {
+      page: req.query.page,
+      limit: req.query.limit,
+      sort: { createdAt: -1 },
+    });
+
+    res.status(200).json(result);
   } catch (error) {
     res.status(500).json({ message: 'Failed to fetch submissions', error });
   }

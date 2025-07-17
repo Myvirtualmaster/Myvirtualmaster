@@ -1,4 +1,5 @@
 import { CourseSubmission } from "../models/index.js";
+import { paginate } from "../utils/paginate.js";
 
 // Create submission
 export const submitCourse = async (req, res) => {
@@ -14,8 +15,15 @@ export const submitCourse = async (req, res) => {
 // Get all submissions (Admin)
 export const getAllSubmissions = async (req, res) => {
   try {
-    const submissions = await CourseSubmission.find().populate('course');
-    res.status(200).json(submissions);
+    const queryBuilder = CourseSubmission.find().populate('course');
+
+    const result = await paginate(queryBuilder, {}, {
+      page: req.query.page,
+      limit: req.query.limit,
+      sort: { reviewed_at: -1 }
+    });
+
+    res.status(200).json(result);
   } catch (err) {
     res.status(500).json({ message: 'Failed to fetch submissions', err });
   }

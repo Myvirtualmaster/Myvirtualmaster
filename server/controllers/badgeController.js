@@ -1,4 +1,5 @@
 import { Badge } from '../models/index.js';
+import { paginate } from '../utils/paginate.js';
 
 export const createBadge = async (req, res) => {
   try {
@@ -12,8 +13,15 @@ export const createBadge = async (req, res) => {
 
 export const getAllBadges = async (req, res) => {
   try {
-    const badges = await Badge.find();
-    res.status(200).json(badges);
+    const queryBuilder = Badge.find();
+
+    const result = await paginate(queryBuilder, {}, {
+      page: req.query.page,
+      limit: req.query.limit,
+      sort: { createdAt: -1 }
+    });
+
+    res.status(200).json(result);
   } catch (err) {
     res.status(500).json({ message: 'Failed to fetch badges', err });
   }

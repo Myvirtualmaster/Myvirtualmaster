@@ -1,4 +1,5 @@
 import { CourseReview } from '../models/index.js';
+import { paginate } from '../utils/paginate.js';
 
 export const createReview = async (req, res) => {
   try {
@@ -12,8 +13,15 @@ export const createReview = async (req, res) => {
 
 export const getAllReviews = async (req, res) => {
   try {
-    const reviews = await CourseReview.find();
-    res.status(200).json(reviews);
+    const queryBuilder = CourseReview.find();
+
+    const result = await paginate(queryBuilder, {}, {
+      page: req.query.page,
+      limit: req.query.limit,
+      sort: { created_at: -1 }
+    });
+
+    res.status(200).json(result);
   } catch (err) {
     res.status(500).json({ message: 'Failed to fetch reviews', err });
   }

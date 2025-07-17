@@ -1,6 +1,7 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import {User} from '../models/index.js';
+import { paginate } from '../utils/paginate.js';
 
 export const registerUser = async (req, res) => {
   try {
@@ -49,10 +50,18 @@ export const loginUser = async (req, res) => {
 
 export const getAllUsers = async (req, res) => {
   try {
-    const users = await User.find().select('-password');
-    res.status(200).json(users);
+       const queryBuilder = User.find().select('-password');
+
+    const result = await paginate(queryBuilder, {}, {
+      page: req.query.page,
+      limit: req.query.limit,
+      sort: { createdAt: -1 }
+    });
+
+    res.status(200).json(result);
   }
   catch (error) {
+    console.error(error)
     res.status(500).json({ message: 'Failed to fetch users', error });
   }
 };

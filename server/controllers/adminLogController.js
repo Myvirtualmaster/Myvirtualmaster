@@ -1,4 +1,5 @@
 import { AdminLog } from '../models/index.js';
+import { paginate } from '../utils/paginate.js';
 
 // Create a new admin log
 export const createLog = async (req, res) => {
@@ -11,11 +12,16 @@ export const createLog = async (req, res) => {
   }
 };
 
-// Get all logs (optionally paginated or filtered in the future)
 export const getAllLogs = async (req, res) => {
   try {
-    const logs = await AdminLog.find().sort({ timestamp: -1 });
-    res.status(200).json(logs);
+    const queryBuilder = AdminLog.find().sort({ timestamp: -1 });
+
+    const result = await paginate(queryBuilder, {}, {
+      page: req.query.page,
+      limit: req.query.limit
+    });
+
+    res.status(200).json(result);
   } catch (err) {
     res.status(500).json({ message: 'Failed to fetch logs', err });
   }
@@ -58,19 +64,24 @@ export const getLogsByAdmin = async (req, res) => {
   try {
     const { adminId } = req.params;
 
-    const logs = await AdminLog.find({ admin: adminId })
-      .sort({ timestamp: -1 }) // latest first
-      .populate('admin', 'name email'); // optional: show admin name/email
+    const result = await paginate(
+      AdminLog.find({ admin: adminId }).populate('admin', 'name email'),
+      {},
+      {
+        page: req.query.page,
+        limit: req.query.limit,
+        sort: { timestamp: -1 }
+      }
+    );
 
-    if (!logs || logs.length === 0) {
+    if (!result.data.length) {
       return res.status(404).json({ message: 'No logs found for this admin.' });
     }
 
-    res.status(200).json(logs);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: 'Failed to fetch logs by admin', err });
+    res.status(200).json(result);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Failed to fetch logs by admin', error });
   }
 };
-
 

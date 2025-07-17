@@ -1,4 +1,5 @@
 import {Assignment} from '../models/index.js';
+import { paginate } from '../utils/paginate.js';
 
 export const createAssignment = async (req, res) => {
   try {
@@ -13,9 +14,17 @@ export const createAssignment = async (req, res) => {
 
 export const getAllAssignments = async (req, res) => {
   try {
-    const assignments = await Assignment.find();
-    res.status(200).json(assignments);
+    const queryBuilder = Assignment.find();
+
+    const result = await paginate(queryBuilder, {}, {
+      page: req.query.page,
+      limit: req.query.limit,
+      sort: { due_date: 1 }
+    });
+
+    res.status(200).json(result);
   } catch (error) {
+    console.error(error)
     res.status(500).json({ message: 'Failed to fetch assignments', error });
   }
 };
