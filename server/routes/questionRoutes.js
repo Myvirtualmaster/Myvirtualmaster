@@ -4,7 +4,7 @@ import { createQuestion, deleteQuestion, getQuestionById, getQuestionByQuiz, upd
 const router = express.Router();
 
 router.post('/register/:quizId', createQuestion);
-router.get('/:questionId', getQuestionByQuiz);
+router.get('/:quizId', getQuestionByQuiz);
 router.get('/single/:id', getQuestionById);
 router.delete('/delete/:id', deleteQuestion);
 router.put('/update/:id', updateQuestion);

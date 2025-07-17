@@ -1,4 +1,5 @@
 import { LessonFeedback } from "../models/index.js";
+import { paginate } from "../utils/paginate.js";
 
 export const createFeedback = async (req, res) => {
   try {
@@ -14,17 +15,24 @@ export const createFeedback = async (req, res) => {
 
 export const getAllFeedback = async (req, res) => {
   try {
-    const feedbacks = await LessonFeedback.find()
-    
-    if (!feedbacks) return res.status(404).json({ message: 'Feedback not found' })
+    const queryBuilder = LessonFeedback.find();
 
-    res.status(200).json(feedbacks);    
-  }
-  catch (error) {
+    const result = await paginate(queryBuilder, {}, {
+      page: req.query.page,
+      limit: req.query.limit,
+      sort: { createdAt: -1 }
+    });
+
+    if (!result.data.length) {
+      return res.status(404).json({ message: 'No feedback found' });
+    }
+
+    res.status(200).json(result);
+  } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Failed to fetch feedback', error });
   }
-}
+};
 
 export const getFeedbackById = async (req, res) => {
   try {
@@ -44,17 +52,24 @@ export const getFeedbackById = async (req, res) => {
 
 export const getFeedbackByLesson = async (req, res) => {
   try {
-    const feedback = await LessonFeedback.find({ lesson: req.params.lessonId });
+    const queryBuilder = LessonFeedback.find({ lesson: req.params.lessonId });
 
-    if (!feedback) return res.status(404).json({ message: 'Feedback not found' });
-    res.status(200).json(feedback);
-  }
-  catch (error) {
+    const result = await paginate(queryBuilder, {}, {
+      page: req.query.page,
+      limit: req.query.limit,
+      sort: { createdAt: -1 }
+    });
+
+    if (!result.data.length) {
+      return res.status(404).json({ message: 'No feedback found for this lesson' });
+    }
+
+    res.status(200).json(result);
+  } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Server error', error });
   }
-}
-
+};
 export const deleteFeedback = async (req, res) => {
   try {
     const feedback = await LessonFeedback.findByIdAndDelete(req.params.id);

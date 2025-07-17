@@ -1,4 +1,5 @@
 import { CalendarEvent } from '../models/index.js';
+import { paginate } from '../utils/paginate.js';
 
 export const createEvent = async (req, res) => {
   try {
@@ -12,8 +13,15 @@ export const createEvent = async (req, res) => {
 
 export const getAllEvents = async (req, res) => {
   try {
-    const events = await CalendarEvent.find();
-    res.status(200).json(events);
+    const queryBuilder = CalendarEvent.find();
+
+    const result = await paginate(queryBuilder, {}, {
+      page: req.query.page,
+      limit: req.query.limit,
+      sort: { start_time: 1 }
+    });
+
+    res.status(200).json(result);
   } catch (err) {
     res.status(500).json({ message: 'Failed to fetch events', err });
   }

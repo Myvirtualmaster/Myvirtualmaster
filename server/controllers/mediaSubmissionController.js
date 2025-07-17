@@ -1,4 +1,5 @@
 import { MediaSubmission } from '../models/index.js';
+import { paginate } from '../utils/paginate.js';
 
 export const createMediaSubmission = async (req, res) => {
   try {
@@ -17,9 +18,19 @@ export const createMediaSubmission = async (req, res) => {
 
 export const getMediaByAssignment = async (req, res) => {
   try {
-    const submissions = await MediaSubmission.find({ assignment: req.params.assignmentId })
-      .populate('user');
-    res.status(200).json(submissions);
+    const queryBuilder = MediaSubmission.find({ assignment: req.params.assignmentId }).populate('user');
+
+    const result = await paginate(queryBuilder, {}, {
+      page: req.query.page,
+      limit: req.query.limit,
+      sort: { submitted_at: -1 }
+    });
+
+    if (!result.data.length) {
+      return res.status(404).json({ message: 'No submissions found for this assignment' });
+    }
+
+    res.status(200).json(result);
   } catch (err) {
     res.status(500).json({ message: 'Failed to fetch submissions', err });
   }
@@ -27,9 +38,19 @@ export const getMediaByAssignment = async (req, res) => {
 
 export const getMediaByUser = async (req, res) => {
   try {
-    const submissions = await MediaSubmission.find({ user: req.params.userId })
-      .populate('assignment');
-    res.status(200).json(submissions);
+    const queryBuilder = MediaSubmission.find({ user: req.params.userId }).populate('assignment');
+
+    const result = await paginate(queryBuilder, {}, {
+      page: req.query.page,
+      limit: req.query.limit,
+      sort: { submitted_at: -1 }
+    });
+
+    if (!result.data.length) {
+      return res.status(404).json({ message: 'No submissions found for this user' });
+    }
+
+    res.status(200).json(result);
   } catch (err) {
     res.status(500).json({ message: 'Failed to fetch submissions', err });
   }

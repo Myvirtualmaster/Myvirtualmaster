@@ -1,4 +1,5 @@
 import { SavedCourse } from '../models/index.js';
+import { paginate } from '../utils/paginate.js';
 
 // Save a course
 export const saveCourse = async (req, res) => {
@@ -17,8 +18,15 @@ export const saveCourse = async (req, res) => {
 // Get saved courses
 export const getSavedCourses = async (req, res) => {
   try {
-    const saved = await SavedCourse.find({ user: req.user.id }).populate('course');
-    res.status(200).json(saved);
+    const queryBuilder = SavedCourse.find({ user: req.user.id }).populate('course');
+
+    const result = await paginate(queryBuilder, {}, {
+      page: req.query.page,
+      limit: req.query.limit,
+      sort: { saved_at: -1 },
+    });
+
+    res.status(200).json(result);
   } catch (err) {
     res.status(500).json({ message: 'Failed to get saved courses', err });
   }

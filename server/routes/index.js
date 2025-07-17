@@ -25,6 +25,9 @@ import paymentRoutes from './paymentRoutes.js';
 import badgeRoutes from './badgeRoutes.js';
 import mediaSubmissionRoutes from './mediaSubmissionRoutes.js';
 import achievementRoutes from './achievementRoutes.js';
+import forumRoutes from './forumRoutes.js';
+import postRoutes from './postRoutes.js';
+import replyRoutes from './replyRoutes.js';
 import { protect } from '../middleware/authMiddleware.js';
 import { isNotStudent } from '../middleware/roleMiddleware.js';
 
@@ -56,5 +59,8 @@ router.use('/payment', protect, paymentRoutes);
 router.use('/badge', protect, badgeRoutes);
 router.use('/achievement', protect, achievementRoutes);
 router.use('/mediasubmission', mediaSubmissionRoutes);
+router.use('/forum', forumRoutes);
+router.use('/post', postRoutes);
+router.use('/reply', replyRoutes);
 
 export default router;

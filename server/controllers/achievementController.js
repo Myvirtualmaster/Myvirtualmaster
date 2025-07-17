@@ -1,4 +1,5 @@
 import { Achievement } from '../models/index.js';
+import { paginate } from '../utils/paginate.js';
 
 export const awardBadge = async (req, res) => {
   try {
@@ -15,8 +16,16 @@ export const awardBadge = async (req, res) => {
 
 export const getUserAchievements = async (req, res) => {
   try {
-    const achievements = await Achievement.find({ user: req.params.userId }).populate('badge');
-    res.status(200).json(achievements);
+    const paginationResult = await paginate(
+      Achievement.find({ user: req.params.userId }).populate('badge'),
+      {
+        page: req.query.page,
+        limit: req.query.limit,
+        sort: { awarded_at: -1 } // or another field
+      }
+    );
+
+    res.status(200).json(paginationResult);
   } catch (err) {
     res.status(500).json({ message: 'Failed to fetch achievements', err });
   }

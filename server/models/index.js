@@ -24,6 +24,9 @@ import AdminLog from './adminLogModel.js';
 import Achievement from './achievementModel.js';
 import Payment from './paymentModel.js';
 import MediaSubmission from './mediaSubmissionModel.js';
+import Forum from './forumModel.js';
+import Post from './postModel.js';
+import Reply from './replyModel.js';
 
 export {
   User,
@@ -52,4 +55,7 @@ export {
   Achievement,
   Payment,
   MediaSubmission,
+  Forum,
+  Post,
+  Reply,
 };
